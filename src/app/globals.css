@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+ /* Theme */
+ --theme-background: var(--theme-1-background);
+ --theme-primary: var(--theme-1-primary);
+ --theme-secondary: var(--theme-1-secondary);
+ --theme-accent: var(--theme-1-accent);
+
+ /* main */
+ --theme-1-background: #433878;
+ --theme-1-primary: #ffe1ff;
+ --theme-1-secondary: #e4b1f0;
+ --theme-1-accent: #7e60bf;
+
+ /* oclemconcursos */
+ --theme-2-background: #971330;
+ --theme-2-primary: #fde2e7;
+ --theme-2-secondary: #f8bcc8;
+ --theme-2-accent: #5c0b1d;
+
+ /* loopguard - morado */
+ --theme-3-background: #6b46c1;
+ --theme-3-primary: #ede9fe;
+ --theme-3-secondary: #c4b5fd;
+ --theme-3-accent: #4338ca;
+
+ /* romancemaps - rosa coral como especificado */
+ --theme-4-background: #E86A6A;
+ --theme-4-primary: #fdeaea;
+ --theme-4-secondary: #f5b8b8;
+ --theme-4-accent: #c54545;
+
+ /* experiences */
+ --theme-5-background: #427e9e;
+ --theme-5-primary: #ddf2fd;
+ --theme-5-secondary: #9bbec8;
+ --theme-5-accent: #1e6186;
+
+ /* dividio - azul más clarito como en la imagen */
+ --theme-6-background: #3b82f6;
+ --theme-6-primary: #dbeafe;
+ --theme-6-secondary: #93c5fd;
+ --theme-6-accent: #2563eb;
+
+ /* portfolio - verde menta como especificado con paleta acorde */
+ --theme-7-background: #134e4a;
+ --theme-7-primary: #5eead4;
+ --theme-7-secondary: #99f6e4;
+ --theme-7-accent: #0f766e;
+
+ /* pomodoro - verde claro con rosa y gris oscuro */
+ --theme-8-background: #065f46;
+ --theme-8-primary:  #86efac;
+ --theme-8-secondary: #f9a8d4;
+ --theme-8-accent: #374151;
+
+ --background: #ffffff;
+ --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+ :root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+ }
+}
+
+@layer base {
+ * {
+  @apply transition-colors;
+ }
+
+ #portfolio * {
+  @apply !cursor-none select-none;
+ }
+
+ #portfolio img {
+  @apply pointer-events-none;
+ }
+}
+
+@layer components {
+ .hoverText {
+  transition:
+   0.3s font-weight,
+   0.3s color;
+ }
+
+ .hoverText:hover {
+  font-weight: 900;
+  color: var(--theme-primary);
+ }
+
+ .hoverText:hover + .hoverText {
+  font-weight: 500;
+  color: var(--theme-secondary);
+ }
+
+ .hoverText:hover + .hoverText + .hoverText {
+  font-weight: 300;
+ }
+
+ .hoverText:has(+ .hoverText:hover) {
+  font-weight: 500;
+  color: var(--theme-secondary);
+ }
+
+ .hoverText:has(+ .hoverText + .hoverText:hover) {
+  font-weight: 300;
+ }
+
+ .neon-path {
+  @apply stroke-current text-cyan-400 stroke-[2px];
+  filter: drop-shadow(0 0 6px #0ff) drop-shadow(0 0 12px #0ff);
+  animation: neon-glow 1.5s ease-in-out infinite alternate;
+ }
+}
+
+@layer utilities {
+ .text-balance {
+  text-wrap: balance;
+ }
+
+ .transition-colors {
+  transition-property: color, background-color, border-color,
+   text-decoration-color, fill, stroke;
+  transition-duration: 0.2s;
+  transition-delay: 0.4s; /* value should be exact as animation config duration in constants */
+ }
+}
+
+@keyframes neon-glow {
+ from {
+  filter: drop-shadow(0 0 8px #0ff) drop-shadow(0 0 16px #0ff);
+ }
+ to {
+  filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #0ff);
+ }
+}
